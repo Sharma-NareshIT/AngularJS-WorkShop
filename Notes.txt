@@ -1,0 +1,217 @@
+	Environment Setup for Angular JS
+	============================
+1. You have to install a Package Manager
+     - NPM - from Node JS
+     - [Node Package Manager]
+     - Get it by installing Node JS on your PC
+
+       https://nodejs.org/en/download/
+
+2. Download and Install Visual studio Code editor
+
+       https://code.visualstudio.com/
+
+  Check Version from Command Prompt:
+	> node -v
+	> npm -v
+
+	 Create a new Project for Angular JS
+	 ==============================
+1. Create a new Folder for your project 
+	C:\AngularJsWorkshop
+
+2. Open your project folder in Visual Studio Code 
+
+3. Goto "Extenstions" of VS Code and Install following extentions
+	- Live Server
+	- IntelliSense for CSS class names in HTML
+
+4. Add a new HTML page into Project folder
+	            "index.html"
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Angular Workshop</title>
+    </head>
+    <body>
+        <h2>Index Page</h2>
+    </body>
+</html>
+
+5. Right Click in the Page and select
+	"Open With Live Server"
+
+6. Install following Packages into your project
+	
+    - Goto Terminal Menu → Select "New Terminal"
+    - Run the following commands
+
+    > npm install bootstrap	[4.5]
+    > npm install jquery	[3.5]
+    > npm install angular	[angular js 1.8.0]
+
+Location of Packages you have installed for Project
+	
+	C:\AngularJsWorkshop
+	   |_node_modules
+	      |_bootstrap
+	      |   |_dist
+	      |      |_css
+	      |      |   |_bootstrap.css
+	      |      |_js
+	      |          |_bootstrap.bundle.js
+	      |_jquery
+	      |   |_dist
+	      |      |_jquery.js    
+	      |_angular
+	         |_angular.js
+
+- ng-app  is a directive
+- directive can be used as element, attribute, class, comment.
+	<ng-app>			Element
+	<div ng-app>    		Attribute
+	<div class="ng-app">	Class
+	<!-- ng-app -->		Comment
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="node_modules/angular/angular.js"></script>
+    </head>
+    <body ng-app>
+        <div>
+            Addition: {{10+20}}
+        </div>
+        <div>
+            Multiply : {{4 * 5}}
+        </div>
+    </body>
+</html>
+
+	 Angular JS Framework Components
+1. Modules
+2. Directives
+3. Filters
+4. Services
+5. Factories
+6. Templates
+7. Models
+8. Views
+9. Controllers		
+
+	 Angular JS uses MVC and MVVM 
+- Model View Controller
+- Model View - View Model
+
+
+
+Example-1 :  Model Binding
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+        <script src="node_modules/angular/angular.js"></script>
+    </head>
+    <body ng-app class="container-fluid">
+       <h2 class="text-primary text-center">Angular JS - Data Binding</h2>
+       <div class="row">
+        <div class="col-3">
+            <h4>Register Product</h4>
+            <div class="form-group">
+                <label>Name</label>
+                <div>
+                    <input type="text" ng-model="Name" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                <div>
+                    <input type="text" ng-model="Price" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Shipped To</label>
+                <div>
+                    <select ng-model="ShippedTo" class="form-control">
+                        <option>Delhi</option>
+                        <option>Hyd</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>In Stock</label>
+                <div>
+                    <input ng-model="Stock" type="checkbox"> Yes
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <h4 class="text-center">Details</h4>
+            <table class="table table-hover">
+                <tr>
+                    <td>Name</td>
+                    <td ng-bind="Name"></td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td>{{Price}}</td>
+                </tr>
+                <tr>
+                    <td>Shipped To</td>
+                    <td>{{ShippedTo}}</td>
+                </tr>
+                <tr>
+                    <td>Stock</td>
+                    <td>{{(Stock==true)?"Available":"Out of Stock"}}</td>
+                </tr>
+            </table>
+        </div>
+       </div>
+    </body>
+</html>
+
+
+Example-2: Shopping with Bootstrap
+
+<!DOCTYPE html>
+<html ng-app>
+    <head>
+        <title>Angular Workshop</title>
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="node_modules/fonts/css/all.css">
+        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="node_modules/angular/angular.js"></script>
+    </head>
+    <body class="container-fluid">
+        <div class="btn-toolbar text-white bg-danger justify-content-between">
+            <div class="btn-group">
+                <h3>I-Shop</h3>
+            </div>
+            <div class="btn-group">
+                <input type="text" class="form-control">
+                <button class="btn btn-danger"><span class="fa fa-search"></span></button>
+            </div>
+        </div>
+        <div class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="Images/banner1.jpg"  class="w-100">
+                </div>
+                <div class="carousel-item">
+                    <img src="Images/banner2.jpg"  class="w-100">
+                </div>
+                <div class="carousel-item">
+                    <img src="Images/banner3.jpg"  class="w-100">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
+
+
