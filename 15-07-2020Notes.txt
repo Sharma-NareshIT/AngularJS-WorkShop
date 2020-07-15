@@ -1,0 +1,294 @@
+ng-app
+ng-model
+ng-bind
+{{ }}
+Angular JS Application with Module and Controller
+
+1. module : It is a collection of various components like
+                    directives, filters, services etc..
+	  Angular JS provides several modules like
+	  ngRoute, ngSanitize, ngMessages etc..
+	  Angular Js allows to create custom modules.
+
+ Syntax:
+	angular.module("ModuleName", ["dependency"])
+
+2. controller: It defines application specific logic.
+
+app.controller("ControllerName", function($scope) {
+	$scope.msg = "Some";
+  });
+
+3. Angular JS Events are all JavaScript Events 
+
+	KeyEvents
+
+	ng-keyup
+	ng-keydown
+	ng-keypress
+
+	Mouse Events
+
+	ng-mouseover
+	ng-mouseleave
+	ng-mousemove
+	ng-mousedown
+	ng-mouseup
+
+	Miscelaneous 
+	
+	ng-click
+	ng-dblclick
+	ng-change
+	ng-cut
+	ng-copy
+	ng-submit
+
+
+Ex:
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+        <script src="node_modules/angular/angular.js"></script>
+        <script>
+           var app = angular.module("DemoApp",[]);
+           app.controller("HomeController", function($scope){
+                 var msg = "Welcome to Angular JS";
+                 $scope.msg = msg;
+                 $scope.product = {
+                     Name: 'Samsung TV',
+                     Price: 45000.55,
+                     City: 'Delhi'
+                 };
+                 $scope.SubmitClick = function(){
+                     alert('Form Submitted');
+                 }
+           })
+        </script>
+    </head>
+    <body ng-app="DemoApp" ng-controller="HomeController" class="container-fluid">
+        <h2 class="text-primary text-center">{{msg}}</h2>
+        <dl>
+            <dt>Name</dt>
+            <dd>{{product.Name}}</dd>
+            <dt>Price</dt>
+            <dd>{{product.Price}}</dd>
+            <dt>City</dt>
+            <dd>{{product.City}}</dd>
+        </dl>
+        <button class="btn btn-primary" ng-click="SubmitClick()" >Submit</button>
+    </body>
+</html>
+
+Conditions and Iterations in Angular JS
+ng-if
+ng-repeat
+
+To Show or Hide You can use
+ ng-show
+ ng-hide
+
+ To Add or Remove you can use
+  ng-if
+
+ To Iterate and repeat you can use
+  ng-repeat
+
+
+Ex:
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+        <script src="node_modules/angular/angular.js"></script>
+        <script>
+            var app=angular.module("DemoApp",[]);
+            app.controller("HomeController", function($scope){
+                 $scope.product = {
+                     Name: 'TV',
+                     Price: 45000.55
+                 };
+                 $scope.updatedProduct = {
+                     Name: '',
+                     Price: 0
+                 }
+                 $scope.showPanel = false;
+                 $scope.electronics = [
+                     "TV",
+                     "Mobile",
+                     "Shoe"
+                 ]
+                 $scope.AddClick = function(){
+                    $scope.showPanel = true;
+                    $scope.updatedProduct = {
+                        Name: $scope.product.Name,
+                        Price: $scope.product.Price
+                    }
+                 }
+            })
+        </script>
+    </head>
+    <body class="container-fluid" ng-app="DemoApp" ng-controller="HomeController">
+        <div class="row">
+            <div class="col-3">
+                <dl>
+                    <dt>Name</dt>
+                    <dd><input type="text" ng-model="product.Name" class="form-control"></dd>
+                    <dt>Price</dt>
+                    <dd><input type="text" ng-model="product.Price" class="form-control"></dd>
+                </dl>
+                <button ng-click="AddClick()" class="btn btn-block btn-primary">Add Product</button>
+            </div>
+            <div class="col-9">
+                <dl ng-if="showPanel">
+                    <dt>Name</dt>
+                    <dd>{{updatedProduct.Name}}</dd>
+                    <dt>Price</dt>
+                    <dd>{{updatedProduct.Price}}</dd>
+                </dl>
+                <ol>
+                    <li ng-repeat="item in electronics">
+                        {{item}}
+                    </li>
+                </ol>
+                <select>
+                    <option ng-repeat="item in electronics">
+                        {{item}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </body>
+</html>
+
+		Shopping Cart
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="node_modules/fonts/css/all.css">
+        <script src="node_modules/angular/angular.js"></script>
+        <script>
+           var app=angular.module("ShoppingApp",[]);
+           app.controller("HomeController", function($scope){
+            $scope.categories = ["Electronics", "Footwear", "Fashion"];
+            $scope.electronics = ["JBL Speaker", "Earpods"];
+            $scope.footwear = ["Nike Casuals", "Lee Cooper Boot"];
+            $scope.fashion = ["Shirt", "Jeans"];
+
+            $scope.data =[
+                {Name: "JBL Speaker", Price: 4500.55, Photo: "Images/jblspeaker.jpg"},
+                {Name: "Earpods", Price: 3500.55, Photo: "Images/earpods.jpg"},
+                {Name: "Nike Casuals", Price: 6500.55, Photo: "Images/shoe.jpg"},
+                {Name: "Lee Cooper Boot", Price: 3500.55, Photo: "Images/shoe1.jpg"},
+                {Name: "Shirt", Price: 1500.55, Photo: "Images/shirt.jpg"},
+                {Name: "Jeans", Price: 2500.55, Photo: "Images/jeans.jpg"},
+            ];
+
+            $scope.categoryName;
+            $scope.productName;
+
+            $scope.products = [];
+
+            $scope.CategoryChanged = function(){
+                switch($scope.categoryName.trim()){
+                    case "Electronics":
+                    $scope.products = $scope.electronics;
+                    break;
+                    case "Footwear":
+                    $scope.products = $scope.footwear;
+                    break;
+                    case "Fashion":
+                    $scope.products = $scope.fashion;
+                    break;
+                }
+            }
+             $scope.searchedProduct = [];
+             $scope.ProductChanged = function(){
+                 $scope.searchedProduct = $scope.data.filter(x=>x.Name==$scope.productName.trim());
+             }
+             $scope.shoppingcart = [];
+             $scope.showCart = false;
+             $scope.AddToCartClick= function(){
+                $scope.shoppingcart.push($scope.searchedProduct[0]);
+                alert("Item Added to Cart");
+             }
+             $scope.ToggleCart = function(){
+                 $scope.showCart = ($scope.showCart==false)?true:false;
+             }
+             $scope.RemoveItem = function(i){
+                 var msg = confirm("Are you sure, what to Delete?");
+                 if(msg==true) {
+                     $scope.shoppingcart.splice(i,1);
+                 }
+             }
+           });
+        </script>
+    </head>
+    <body ng-app="ShoppingApp" ng-controller="HomeController">
+        <div style="padding: 20px;">
+            <div class="row">
+                <div class="col-3">
+                   <dl>
+                       <dt>Select Category</dt>
+                       <dd>
+                           <select ng-model="categoryName" ng-change="CategoryChanged()" class="form-control">
+                            <option ng-repeat="item in categories">
+                                {{item}}
+                            </option>
+                           </select>
+                       </dd>
+                       <dt>Select Product</dt>
+                       <dd>
+                           <select ng-change="ProductChanged()" ng-model="productName" class="form-control">
+                            <option ng-repeat="item in products">
+                                {{item}}
+                            </option>
+                           </select>
+                       </dd>
+                       <dt>Preview</dt>
+                       <dd class="text-center">
+                           <h4>{{searchedProduct[0].Name}}</h4>
+                           <img src="{{searchedProduct[0].Photo}}" width="100" height="100">
+                           <h4>{{searchedProduct[0].Price |currency:'&#8377;'}}</h4>
+                       </dd>
+                       <dd>
+                           <button ng-click="AddToCartClick()" class="btn btn-danger btn-block"><span class="fa fa-shopping-cart"></span>Add to Cart</button>
+                       </dd>
+                   </dl>
+                </div>
+                <div class="col-6">
+                    <table ng-if="showCart" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name <input type="text" ng-model="search"></th>
+                                <th>Price</th>
+                                <th>Preview</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in shoppingcart |filter:search">
+                                <td>{{item.Name}}</td>
+                                <td>{{item.Price}}</td>
+                                <td><img src="{{item.Photo}}" width="50" height="50"></td>
+                                <td>
+                                    <button ng-click="RemoveItem($index)" class="btn btn-outline-danger">
+                                        <span class="fa fa-trash"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-3">
+                    <button ng-click="ToggleCart()" class="btn btn-dark">
+                        <span class="fa fa-shopping-cart"></span>
+                        [{{shoppingcart.length}}] Your Cart Items
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
